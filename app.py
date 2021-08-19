@@ -1,5 +1,4 @@
 import os
-import re
 from flask import Flask
 from flask_restful import Api ,Resource
 from flask_jwt import JWT
@@ -9,14 +8,10 @@ from resources.register_user import RegisterUser
 from resources.item import Item ,ItemsList
 from resources.store import Store ,StoresList
 
-uri = os.getenv("DATABASE_URL")  
-if uri.startswith("postgres://"):
-    uri = uri.replace("postgres://", "postgresql://", 1)
-
 
 app = Flask(__name__)
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
-app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get("DATABASE_URL","sqlite:///data.db")
+app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get("postgresql://jkmocrjuoigsny:09aeec041fc4a2554b0a57afa6bfaff7d1b338c826f0a3b1b341a88241b9c270@ec2-54-220-53-223.eu-west-1.compute.amazonaws.com:5432/dege5uu67in11g","sqlite:///data.db")
 
 
 app.secret_key = "jose"
