@@ -9,12 +9,15 @@ from resources.register_user import RegisterUser
 from resources.item import Item ,ItemsList
 from resources.store import Store ,StoresList
 
-app = Flask(__name__)
-app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
-app.config['SQLALCHEMY_DATABASE_URI'] = uri
 uri = os.getenv("DATABASE_URL")  
 if uri.startswith("postgres://"):
     uri = uri.replace("postgres://", "postgresql://", 1)
+
+
+app = Flask(__name__)
+app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get("DATABASE_URL","sqlite:///data.db")
+
 
 app.secret_key = "jose"
 api = Api(app)
